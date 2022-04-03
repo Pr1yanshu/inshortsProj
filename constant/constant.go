@@ -34,7 +34,7 @@ const (
 )
 
 const (
-	PORT                      = 9007
+	PORT                      = "9007"
 	DIALER_TIME_OUT           = 1000
 	MaxIdleConnectionsPerHost = 5
 )

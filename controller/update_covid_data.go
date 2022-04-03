@@ -14,7 +14,7 @@ import (
 
 // UpdateCovidData godoc
 // @Summary      update covid data
-// @Description  fetch covid data and persist in mongo
+// @Description  fetch covid data and pers ist in mongo
 // @Tags         CovidAPIs
 // @Accept       json
 // @Produce      json

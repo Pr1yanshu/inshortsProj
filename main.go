@@ -11,7 +11,6 @@ import (
 	covidRoutes "inshortsProj/router"
 	"io"
 	"os"
-	"strconv"
 )
 
 // @title Covid API
@@ -55,7 +54,11 @@ func initializeServer() {
 	covidRoutesGroup := router.Group("/api/covid")
 	covidRoutes.AddCovidRoutes(covidRoutesGroup)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	err := router.Run(":" + strconv.Itoa(constant.PORT))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = constant.PORT
+	}
+	err := router.Run(":" + port)
 	if err != nil {
 		fmt.Println(err)
 	}
