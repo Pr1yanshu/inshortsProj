@@ -1,0 +1,3 @@
+{"Block":"GetDataForRegion","Error":"mongo: no documents in result","Log":"MobileCoreApp","Vertical":"api/getCovidData","level":"error","msg":"Error logs","tag":"","time":"2022-04-03T19:45:02+05:30"}
+{"Block":"GetDataForRegion","Error":"mongo: no documents in result","Log":"MobileCoreApp","Vertical":"api/getCovidData","level":"error","msg":"Error logs","tag":"","time":"2022-04-03T19:45:09+05:30"}
+{"Block":"UpdateCovidData","Error":"write exception: write errors: [E11000 duplicate key error collection: CovidDatabase.StateData index: _id_ dup key: { _id: ObjectId('6249adf9688aef433cbd9faf') }]","Log":"MobileCoreApp","Vertical":"api/updateCovidData","level":"error","msg":"Error logs","tag":"","time":"2022-04-03T19:54:01+05:30"}

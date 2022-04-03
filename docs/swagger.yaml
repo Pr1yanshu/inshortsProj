@@ -1,0 +1,104 @@
+basePath: /api/covid
+definitions:
+  models.Finalresponse:
+    properties:
+      confirmed:
+        type: integer
+      deceased:
+        type: integer
+      last_updated:
+        type: string
+      recovered:
+        type: integer
+    type: object
+  models.RegionData:
+    properties:
+      meta:
+        properties:
+          last_updated:
+            type: string
+        type: object
+      total:
+        properties:
+          confirmed:
+            type: integer
+          deceased:
+            type: integer
+          recovered:
+            type: integer
+        type: object
+    type: object
+info:
+  contact: {}
+  title: Covid API
+  version: "1.0"
+paths:
+  /api/covid/getCovidData/:
+    get:
+      consumes:
+      - application/json
+      description: get covid data by lat,long
+      parameters:
+      - description: latitude of the user
+        in: query
+        name: lat
+        type: string
+      - description: longitude of the user
+        in: query
+        name: long
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Finalresponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: get covid data
+      tags:
+      - CovidAPIs
+  /api/covid/healthCheck:
+    get:
+      consumes:
+      - application/json
+      description: do health check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: health check
+      tags:
+      - ping
+  /api/covid/updateCovidData/:
+    post:
+      consumes:
+      - application/json
+      description: fetch covid data and persist in mongo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/models.RegionData'
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: update covid data
+      tags:
+      - CovidAPIs
+swagger: "2.0"

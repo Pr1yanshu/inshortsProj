@@ -1,0 +1,161 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Covid API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/api/covid",
+    "paths": {
+        "/api/covid/getCovidData/": {
+            "get": {
+                "description": "get covid data by lat,long",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CovidAPIs"
+                ],
+                "summary": "get covid data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "latitude of the user",
+                        "name": "lat",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "longitude of the user",
+                        "name": "long",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Finalresponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/covid/healthCheck": {
+            "get": {
+                "description": "do health check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ping"
+                ],
+                "summary": "health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/covid/updateCovidData/": {
+            "post": {
+                "description": "fetch covid data and persist in mongo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CovidAPIs"
+                ],
+                "summary": "update covid data",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/models.RegionData"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Finalresponse": {
+            "type": "object",
+            "properties": {
+                "confirmed": {
+                    "type": "integer"
+                },
+                "deceased": {
+                    "type": "integer"
+                },
+                "last_updated": {
+                    "type": "string"
+                },
+                "recovered": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.RegionData": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "properties": {
+                        "last_updated": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "total": {
+                    "type": "object",
+                    "properties": {
+                        "confirmed": {
+                            "type": "integer"
+                        },
+                        "deceased": {
+                            "type": "integer"
+                        },
+                        "recovered": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
