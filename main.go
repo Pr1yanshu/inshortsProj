@@ -10,6 +10,7 @@ import (
 	docs "inshortsProj/docs"
 	covidRoutes "inshortsProj/router"
 	"io"
+	"log"
 	"os"
 )
 
@@ -56,7 +57,7 @@ func initializeServer() {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = constant.PORT
+		log.Fatal("$PORT must be set")
 	}
 	err := router.Run(":" + port)
 	if err != nil {
