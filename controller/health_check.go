@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"inshortsProj/logger"
 	"net/http"
@@ -18,7 +17,5 @@ import (
 func GetHealthStatus(ctx *gin.Context) {
 	header := ctx.Request.Header
 	logger.ErrorLog.Error(header)
-	byte, _ := json.Marshal("server is working!!")
-
-	ctx.JSON(http.StatusOK, byte)
+	ctx.JSON(http.StatusOK, "Server is up and running !!!")
 }
