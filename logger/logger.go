@@ -46,7 +46,7 @@ func init() {
 }
 
 func LogInfoForScalyr(Description string, FunctionNameDescription string, vertical string, unique_id_tagging interface{}) {
-	MobileCore := constant.MOBILECOREAPP
+	MobileCore := constant.COVIDAPP
 	InfoLog.WithFields(log.Fields{
 		"Log":         MobileCore,
 		"Description": Description,
@@ -57,7 +57,7 @@ func LogInfoForScalyr(Description string, FunctionNameDescription string, vertic
 }
 
 func LogErrorForScalyr(Error string, FunctionNameDescription string, vertical string, unique_id_tagging interface{}) {
-	MobileCore := constant.MOBILECOREAPP
+	MobileCore := constant.COVIDAPP
 	ErrorLog.WithFields(log.Fields{
 		"Log":      MobileCore,
 		"Error":    Error,
@@ -69,7 +69,7 @@ func LogErrorForScalyr(Error string, FunctionNameDescription string, vertical st
 
 func Debug(Description string, FunctionNameDescription string, vertical string, unique_id_tagging interface{}) {
 
-	MobileCore := constant.MOBILECOREAPP
+	MobileCore := constant.COVIDAPP
 	DebugLog.WithFields(log.Fields{
 		"Log":         MobileCore,
 		"Description": Description,

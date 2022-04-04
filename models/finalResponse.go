@@ -5,4 +5,5 @@ type Finalresponse struct {
 	Deceased    int64  `json:"deceased"`
 	Recovered   int64  `json:"recovered"`
 	LastUpdated string `json:"last_updated"`
+	RegionCode  string `json:"region_code"`
 }

@@ -7,17 +7,15 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"inshortsProj/constant"
-	docs "inshortsProj/docs"
+	"inshortsProj/docs"
 	covidRoutes "inshortsProj/router"
 	"io"
-	"log"
 	"os"
 )
 
 // @title Covid API
 // @version 1.0
 // @BasePath /api/covid
-
 func main() {
 	initializeServer()
 }
@@ -51,13 +49,17 @@ func initializeServer() {
 		)
 	}))
 	router.Use(gin.Recovery())
+
 	docs.SwaggerInfo.BasePath = "/api/covid"
+
+	//Adding Covid routes
 	covidRoutesGroup := router.Group("/api/covid")
 	covidRoutes.AddCovidRoutes(covidRoutesGroup)
+	//Adding Swagger GUI route
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	port := os.Getenv("PORT")
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		port = constant.PORT
 	}
 	err := router.Run(":" + port)
 	if err != nil {

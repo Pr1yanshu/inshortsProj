@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"inshortsProj/connector"
+	"inshortsProj/constant"
 	"inshortsProj/logger"
 	"inshortsProj/models"
 	"inshortsProj/utility"
@@ -32,6 +33,7 @@ func GetCovidData(ctx *gin.Context) {
 			panic(ErrorString)
 		}
 	}()
+
 	lat := ctx.Request.URL.Query().Get("lat")
 	long := ctx.Request.URL.Query().Get("long")
 	if len(lat) == 0 || len(long) == 0 {
@@ -41,21 +43,21 @@ func GetCovidData(ctx *gin.Context) {
 
 	response, err := connector.ReverseGeoCode(ctx, lat, long)
 	if err != nil {
-		logger.LogErrorForScalyr(err.Error(), "GetCovidData", "api/getCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "GetCovidData", constant.GET_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error, geoCode API failing!!")
 		return
 	}
 	var finalResponse models.GeoCodingResponse
 	err = json.Unmarshal(response, &finalResponse)
 	if err != nil {
-		logger.LogErrorForScalyr(err.Error(), "GetCovidData", "api/getCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "GetCovidData", constant.GET_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error, unmarshaling failing!!")
 		return
 	}
 
 	regionCode, err := utility.GetRegionCode(ctx, finalResponse)
 	if err != nil {
-		logger.LogErrorForScalyr(err.Error(), "GetCovidData", "api/getCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "GetCovidData", constant.GET_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error, no region code found for the given lat long!!")
 		return
 	}

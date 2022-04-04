@@ -15,7 +15,7 @@ func ReverseGeoCode(ctx *gin.Context, lat string, long string) ([]byte, error) {
 	header["Accept"] = "application/json"
 	data, err := http_call.MakeGetHttpCall(url, header, constant.REVERSE_GEO_CODE_API_TIMEOUT)
 	if err != nil {
-		logger.LogErrorForScalyr(err.Error(), "reverseGeoCode", "api/getCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "reverseGeoCode", constant.GET_COVID_DATA_VERTICAL, "")
 		return data, err
 	}
 	return data, nil

@@ -11,7 +11,7 @@ const (
 )
 
 const (
-	LogInfoFilePath   = "mobilecore.json"
+	LogInfoFilePath   = "app.json"
 	LogAccessFilePath = "access.log"
 )
 
@@ -29,8 +29,8 @@ const (
 )
 
 const (
-	ALL           = "ALL"
-	MOBILECOREAPP = "MobileCoreApp"
+	ALL      = "ALL"
+	COVIDAPP = "COVIDAPP"
 )
 
 const (
@@ -45,4 +45,11 @@ const (
 	REVERSE_GEO_CODE_API_URL     = "http://api.positionstack.com/v1/reverse?access_key=c3045fb4fc4c1d159316961b82c975da"
 	REVERSE_GEO_CODE_API_TIMEOUT = 1000
 	MONGO_DOC_NAME               = "Covid Data"
+	REDIS_INSTANCE_URI           = "redis-10725.c264.ap-south-1-1.ec2.cloud.redislabs.com:10725"
+	REDIS_AUTH                   = "xPy5o6PgBRm9u0IiVmiNHiQhtauSN4J3"
+)
+
+const (
+	GET_COVID_DATA_VERTICAL    = "api/getCovidData"
+	UPDATE_COVID_DATA_VERTICAL = "api/updateCovidData"
 )

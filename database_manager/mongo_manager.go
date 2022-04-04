@@ -77,7 +77,7 @@ func SetStateCollectionData(ctx *gin.Context, response map[string]models.RegionD
 		if r := recover(); r != nil {
 			ErrorString := "Panic in setStateCollectionData ,General Error: " + fmt.Sprint(r) + " and stack trace = " + string(debug.Stack())
 			fmt.Println(ErrorString)
-			logger.LogErrorForScalyr(ErrorString, "SetStateCollectionData", "api/updateCovidData", "")
+			logger.LogErrorForScalyr(ErrorString, "SetStateCollectionData", constant.UPDATE_COVID_DATA_VERTICAL, "")
 			panic(ErrorString)
 		}
 	}()

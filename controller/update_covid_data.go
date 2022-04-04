@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"inshortsProj/connector"
+	"inshortsProj/constant"
 	"inshortsProj/database_manager"
 	"inshortsProj/logger"
 	"inshortsProj/models"
@@ -33,19 +34,19 @@ func UpdateCovidData(ctx *gin.Context) {
 	var response map[string]models.RegionData
 	data, err := connector.GetData(ctx)
 	if err != nil {
-		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", "api/updateCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", constant.UPDATE_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error, state API failing!!")
 		return
 	}
 	error := json.Unmarshal(data, &response)
 	if error != nil {
-		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", "api/updateCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", constant.UPDATE_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error, Unmarshaling covid state data failing!!")
 		return
 	}
 
 	if err := database_manager.SetStateCollectionData(ctx, response); err != nil {
-		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", "api/updateCovidData", "")
+		logger.LogErrorForScalyr(err.Error(), "UpdateCovidData", constant.UPDATE_COVID_DATA_VERTICAL, "")
 		ctx.JSON(http.StatusInternalServerError, "Internal Server Error,update data failing!!")
 		return
 	}
